@@ -33,7 +33,7 @@ public class DateSorter {
 
     public Collection<LocalDate> sortDates(List<LocalDate> unsortedDates) {
         if(unsortedDates == null || unsortedDates.contains(null)){
-            throw new IllegalArgumentException("///");
+            throw new IllegalArgumentException("Null date can not be processed");
         }
         Collection<LocalDate> monthWithSortParam = unsortedDates.stream()
                 .filter(date -> isContainsSortParameter(date.getMonth()))
