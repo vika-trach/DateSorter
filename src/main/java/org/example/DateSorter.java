@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DateSorter {
+    private final String sortParameter;
+    public DateSorter(String sortParameter) {
+        this.sortParameter = sortParameter;
+    }
     /**
      * The implementation of this method should sort dates.
      * The output should be in the following order:
@@ -24,17 +28,11 @@ public class DateSorter {
      * @param unsortedDates - an unsorted list of dates
      * @return the collection of dates now sorted as per the spec
      */
-
-    private final String sortParameter;
-
-    public DateSorter(String sortParameter) {
-        this.sortParameter = sortParameter;
-    }
-
     public Collection<LocalDate> sortDates(List<LocalDate> unsortedDates) {
         if(unsortedDates == null || unsortedDates.contains(null)){
             throw new IllegalArgumentException("Null date can not be processed");
         }
+
         Collection<LocalDate> monthWithSortParam = unsortedDates.stream()
                 .filter(date -> isContainsSortParameter(date.getMonth()))
                 .sorted()
@@ -46,11 +44,10 @@ public class DateSorter {
                 .toList();
 
         monthWithSortParam.addAll(monthWithoutSortParam);
-
         return monthWithSortParam;
     }
 
-    public boolean isContainsSortParameter(Month month){
+    private boolean isContainsSortParameter(Month month){
         return month.toString().toLowerCase().contains(sortParameter.toLowerCase());
     }
 }
